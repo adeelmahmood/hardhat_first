@@ -11,3 +11,5 @@ artifacts
 gas-report.txt
 coverage.json
 coverage
+
+typechain-types

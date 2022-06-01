@@ -1,16 +1,9 @@
-require("@nomiclabs/hardhat-waffle");
-require("@nomiclabs/hardhat-etherscan");
-require('dotenv').config();
-require('hardhat-gas-reporter');
-require('solidity-coverage');
-
-task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
-  const accounts = await hre.ethers.getSigners();
-
-  for (const account of accounts) {
-    console.log(account.address);
-  }
-});
+import "@nomiclabs/hardhat-waffle"
+import "@nomiclabs/hardhat-etherscan"
+import "dotenv/config"
+import "hardhat-gas-reporter"
+import "solidity-coverage"
+import "@typechain/hardhat"
 
 const ROPSTEN_URL = process.env.ROPSTEN_URL || "https://eth-ropsten";
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "0xkey";

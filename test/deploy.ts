@@ -1,18 +1,19 @@
-const { ethers } = require('hardhat');
-const { assert, expect } = require('chai');
+import { ethers } from "hardhat"
+import { assert, expect } from "chai"
+import { SimpleStorage, SimpleStorage__factory } from "../typechain-types"
 
 describe("SimpleStorage", function () {
-  let factory, contract;
+  let factory: SimpleStorage__factory, contract: SimpleStorage;
 
   beforeEach(async function () {
-    factory = await ethers.getContractFactory("SimpleStorage");
+    factory = (await ethers.getContractFactory("SimpleStorage")) as SimpleStorage__factory;
     contract = await factory.deploy();
   });
 
   it("Should find 0 as the default value", async function () {
     const expected = 0;
     const current = await contract.retrieve();
-    assert.equal(current.toString(), expected);
+    assert.equal(current.toString(), expected.toString());
   });
 
   it("Should be able to update the value", async function () {
@@ -21,7 +22,7 @@ describe("SimpleStorage", function () {
     await transaction.wait(1);
 
     const current = await contract.retrieve();
-    assert.equal(current.toString(), expected);
+    assert.equal(current.toString(), expected.toString());
   });
 
   it("Should add a person with number", async function () {

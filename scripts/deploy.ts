@@ -1,8 +1,9 @@
-const { ethers, run, network } = require('hardhat');
+import { ethers, run, network } from "hardhat"
+import { SimpleStorage, SimpleStorage__factory } from "../typechain-types"
 
 async function main() {
-    const simpleStorageContract = await ethers.getContractFactory("SimpleStorage");
-    const simpleStorage = await simpleStorageContract.deploy();
+    const simpleStorageContract = (await ethers.getContractFactory("SimpleStorage")) as SimpleStorage__factory;
+    const simpleStorage: SimpleStorage = await simpleStorageContract.deploy();
     await simpleStorage.deployed();
     console.log(`SimpleStorage contract deployed to: ${simpleStorage.address}`);
 
@@ -22,14 +23,14 @@ async function main() {
 
 };
 
-async function verify(contractAddress, args) {
+async function verify(contractAddress: string, args: any[]) {
     console.log("Verifying contract");
     try {
         run("verify:verify", {
             address: contractAddress,
             constructorArguments: args
         })
-    } catch (e) {
+    } catch (e: any) {
         if (e.message.toLowerCase().includes("already verified")) {
             console.log("Already verfified");
         }
